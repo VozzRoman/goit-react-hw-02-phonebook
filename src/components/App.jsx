@@ -2,6 +2,7 @@ import React from "react";
 import { Component } from "react";
 import shortid from "shortid";
 import { ContactList } from "./ContcatList/ContactList";
+import { Filter } from "./Filter/Filter";
 export class App extends Component {
 
 	state = {
@@ -13,6 +14,7 @@ export class App extends Component {
 	],
 		name: '',
 		number: '',
+		filter: '',
 	}
 	
 	iputNameId = shortid.generate()
@@ -40,12 +42,34 @@ export class App extends Component {
 			name: this.state.name,
 			number: this.state.number
 		};
-		this.setState(prevState => ({
+		  this.state.contacts.find(item => {
+			if (item.name === addContact.name) {
+				alert(`${item.name}`)
+			} else {
+			this.setState(prevState => ({
 			contacts: [addContact, ...prevState.contacts],
 		}))
+			}
+		})
+	
+		
+	
+	}
+
+	onchangeFilter = (e) => {
+		this.setState({filter: e.currentTarget.value})
+	}
+
+	getFilteredContacts = () => {
+		const normaLized = this.state.filter.toLocaleLowerCase()
+		const sameName = this.state.contacts.filter(item =>
+			item.name.toLocaleLowerCase().includes(normaLized))
+		return sameName;
 	}
 
 	render() {
+		const filteredContacts = this.getFilteredContacts();
+
 		return (
 			<>
 			<section>
@@ -84,8 +108,9 @@ export class App extends Component {
 				
 			<section>
 					<h2>Contacts</h2>
+					<Filter onChange={this.onchangeFilter} value={this.state.filter}  />
 					
-					<ContactList phoneContact={this.state.contacts} onDeleteContact={this.deleteContact} />	
+					<ContactList phoneContact={filteredContacts} onDeleteContact={this.deleteContact} />	
 			</section>
 			
 			</>
