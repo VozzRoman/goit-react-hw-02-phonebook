@@ -1,6 +1,7 @@
 import React from "react";
 import { Component } from "react";
-import shortid from "shortid";
+import { ContactForm } from "./ContactForm/ContactForm";
+import { Box } from "./ContactForm/Container/Box";
 import { ContactList } from "./ContcatList/ContactList";
 import { Filter } from "./Filter/Filter";
 export class App extends Component {
@@ -12,13 +13,21 @@ export class App extends Component {
     	{id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
     	{id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
 	],
-		name: '',
-		number: '',
+	
 		filter: '',
 	}
 	
-	iputNameId = shortid.generate()
-	inputNumberId = shortid.generate()
+	hendlerFormData = (data, numberId) => {
+			const addContact = {
+			id: numberId,
+			name: data.name,
+			number: data.number
+		};
+		console.log(data.name)
+				this.setState(prevState => ({
+			contacts: [addContact, ...prevState.contacts],
+		}))
+	}
 
 	deleteContact = contactId => {
 		this.setState(prevState => ({
@@ -26,35 +35,8 @@ export class App extends Component {
 		}))
 	}
 
-	handleChange = (e) => {
-		console.log(e.currentTarget)
-		console.log(e.currentTarget.name)
-		console.log(e.currentTarget.value)
-		this.setState({
-			[e.currentTarget.name]: e.currentTarget.value
-		})
-	}
-	hendleSubmit = (e) => {
-		e.preventDefault();
-		console.log(this.state);
-		const addContact = {
-			id: shortid.generate(),
-			name: this.state.name,
-			number: this.state.number
-		};
-		  this.state.contacts.find(item => {
-			if (item.name === addContact.name) {
-				alert(`${item.name}`)
-			} else {
-			this.setState(prevState => ({
-			contacts: [addContact, ...prevState.contacts],
-		}))
-			}
-		})
-	
-		
-	
-	}
+
+
 
 	onchangeFilter = (e) => {
 		this.setState({filter: e.currentTarget.value})
@@ -71,39 +53,11 @@ export class App extends Component {
 		const filteredContacts = this.getFilteredContacts();
 
 		return (
-			<>
+			<Box m="0 auto" maxWidth="500px" background="orange" borderRadius="12px" p="20px">
 			<section>
-			<h2>Phonebook</h2>
-			<form onSubmit={this.hendleSubmit}>
-			<label htmlFor={this.iputNameId}>
-				Name
-				<input
-				value={this.state.name}
-				onChange={this.handleChange}
-				id={this.iputNameId}
-  				type="text"
-  				name="name"
-  				pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-  				title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-  				required
-				/>
-			</label>
-			<label htmlFor={this.inputNumberId}>
-				Number
-				<input
-				value={this.state.number}
-				onChange={this.handleChange}
-				id={this.inputNumberId}
-  				type="tel"
-  				name="number"
-  				pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-  				title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-  				required
-				/>				
+					<h2>Phonebook</h2>
+					<ContactForm onSubmit={this.hendlerFormData} />
 
-			</label>
-				<button type="submit">Add contact</button>
-			</form>
 				</section>
 				
 			<section>
@@ -113,7 +67,7 @@ export class App extends Component {
 					<ContactList phoneContact={filteredContacts} onDeleteContact={this.deleteContact} />	
 			</section>
 			
-			</>
+			</Box>
 	
 		)
 		
