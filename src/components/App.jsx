@@ -54,18 +54,18 @@ export class App extends Component {
 
 		return (
 			<Box m="0 auto" maxWidth="500px" background="orange" borderRadius="12px" p="20px">
-			<section>
+			
 					<h2>Phonebook</h2>
 					<ContactForm onSubmit={this.hendlerFormData} />
 
-				</section>
 				
-			<section>
+				
+			
 					<h2>Contacts</h2>
 					<Filter onChange={this.onchangeFilter} value={this.state.filter}  />
 					
 					<ContactList phoneContact={filteredContacts} onDeleteContact={this.deleteContact} />	
-			</section>
+			
 			
 			</Box>
 	

@@ -1,13 +1,13 @@
-
+import { FildName, EnterName } from "components/ContactForm/ContactFormStyle"
 export const Filter = ({onChange, value}) => {
 	return (
-			<label>
+			<FildName>
 			Find contacts
-			<input
+			<EnterName
 				type="text"
 				value={value}
 				onChange={onChange} />
-			</label>
+			</FildName>
 	
 	)
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import shortid from "shortid";
+import { Button, EnterName, FildName, Forms } from "./ContactFormStyle";
 
 export class ContactForm extends Component {
 
@@ -33,10 +34,10 @@ export class ContactForm extends Component {
 
 	render() {
 		return (
-			<form onSubmit={this.hendleSubmit}>
-			<label htmlFor={this.iputNameId}>
+			<Forms onSubmit={this.hendleSubmit}>
+			<FildName htmlFor={this.iputNameId}>
 				Name
-				<input
+				<EnterName
 				value={this.state.name}
 				onChange={this.handleChange}
 				id={this.iputNameId}
@@ -46,10 +47,10 @@ export class ContactForm extends Component {
   				title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
   				required
 				/>
-			</label>
-			<label htmlFor={this.inputNumberId}>
+			</FildName>
+			<FildName htmlFor={this.inputNumberId}>
 				Number
-				<input
+				<EnterName
 				value={this.state.number}
 				onChange={this.handleChange}
 				id={this.inputNumberId}
@@ -60,9 +61,9 @@ export class ContactForm extends Component {
   				required
 				/>				
 
-			</label>
-				<button type="submit">Add contact</button>
-			</form>
+			</FildName>
+				<Button type="submit">Add contact</Button>
+			</Forms>
 		)
 	}
 }
