@@ -1,4 +1,5 @@
-import { FildName, EnterName } from "components/ContactForm/ContactFormStyle"
+import { FildName, EnterName } from "components/ContactForm/ContactFormStyle";
+import PropTypes from 'prop-types';
 export const Filter = ({onChange, value}) => {
 	return (
 			<FildName>
@@ -10,4 +11,9 @@ export const Filter = ({onChange, value}) => {
 			</FildName>
 	
 	)
+}
+
+Filter.propTypes = {
+	onChange: PropTypes.func.isRequired,
+	value: PropTypes.string.isRequired,
 }

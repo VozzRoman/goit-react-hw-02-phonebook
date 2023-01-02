@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import shortid from "shortid";
+import PropTypes from 'prop-types';
 import { Button, EnterName, FildName, Forms } from "./ContactFormStyle";
 
+
+
 export class ContactForm extends Component {
+
+	static propTypes = {
+		onSubmit: PropTypes.func.isRequired
+	}
 
 	state = {
 		name: '',
@@ -30,6 +37,13 @@ export class ContactForm extends Component {
 		// 	number: this.state.number
 		// };
 			this.props.onSubmit(this.state, shortid.generate())
+			this.resetForm();
+		}
+	resetForm = () => {
+		this.setState({
+			name: '',
+			number: '',
+		})
 	}
 
 	render() {
@@ -67,3 +81,4 @@ export class ContactForm extends Component {
 		)
 	}
 }
+

@@ -3,7 +3,11 @@ import { Component } from "react";
 import { ContactForm } from "./ContactForm/ContactForm";
 import { Box } from "./ContactForm/Container/Box";
 import { ContactList } from "./ContcatList/ContactList";
+
+
 import { Filter } from "./Filter/Filter";
+
+
 export class App extends Component {
 
 	state = {
@@ -74,3 +78,4 @@ export class App extends Component {
 	}
 	
 }
+
