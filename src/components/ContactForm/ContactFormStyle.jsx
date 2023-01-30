@@ -15,6 +15,10 @@ export const EnterName = styled.input`
 	font-size: 18px;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	&::placeholder{
+		color: #9c9c9c;
+		font-size: 16px;
+	}
 `;
 
 export const FildName = styled.label`

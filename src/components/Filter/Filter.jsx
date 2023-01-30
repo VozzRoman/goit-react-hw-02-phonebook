@@ -5,9 +5,11 @@ export const Filter = ({onChange, value}) => {
 			<FildName>
 			Find contacts
 			<EnterName
+				placeholder="Find contacts"
 				type="text"
 				value={value}
 				onChange={onChange} />
+				
 			</FildName>
 	
 	)
