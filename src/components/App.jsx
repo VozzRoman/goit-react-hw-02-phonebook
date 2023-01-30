@@ -1,8 +1,8 @@
 import React from 'react';
 import { Component } from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
-import { Background } from './ContactForm/Container/Background';
-import { Box } from './ContactForm/Container/Box';
+import { Background } from './Container/Background';
+import { Box } from './Container/Box';
 import { ContactList } from './ContcatList/ContactList';
 
 import { Filter } from './Filter/Filter';
@@ -21,16 +21,19 @@ export class App extends Component {
 
   hendlerFormData = ({ name, number }, numberId) => {
     console.log({ name, number }); // data
+    const { contacts } = this.state;
     const addContact = {
       id: numberId,
       name,
       number,
     };
 
-    if (this.state.contacts.find(item => item.name === name)) {
+    if (contacts.find(item => item.name === name)) {
       alert(`${name} is already in contacts.`);
-    } else if (this.state.contacts.find(item => item.number === number)) {
+    } else if (contacts.find(item => item.number === number)) {
       alert(`${number} is already in contacts.`);
+    } else if (!/\d{3}[-]\d{2}[-]\d{2}/g.test(number)) {
+      alert('Enter the correct number phone!');
     } else {
       this.setState(prevState => ({
         contacts: [addContact, ...prevState.contacts],
