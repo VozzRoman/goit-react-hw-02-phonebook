@@ -28,13 +28,22 @@ export class ContactForm extends Component {
   hendleSubmit = e => {
     e.preventDefault();
     console.log(this.state);
-    // const addContact = {
-    // 	id: shortid.generate(),
-    // 	name: this.state.name,
-    // 	number: this.state.number
-    // };
+
+    const { name, number } = this.state;
+    const { contacts } = this.props;
+    if (contacts.find(item => item.name === name)) {
+      alert(`${name} is already in contacts.`);
+      return;
+    } else if (contacts.find(item => item.number === number)) {
+      alert(`${number} is already in contacts.`);
+      return;
+    } else if (!/\d{3}[-]\d{2}[-]\d{2}/g.test(number)) {
+      alert('Enter the correct number phone!');
+      return;
+    }
+
+    this.props.onSubmit({ name, number }, shortid.generate());
     this.resetForm();
-    this.props.onSubmit(this.state, shortid.generate());
   };
   resetForm = () => {
     this.setState({

@@ -21,26 +21,14 @@ export class App extends Component {
 
   hendlerFormData = ({ name, number }, numberId) => {
     console.log({ name, number }); // data
-    const { contacts } = this.state;
     const addContact = {
       id: numberId,
       name,
       number,
     };
-
-    if (contacts.find(item => item.name === name)) {
-      alert(`${name} is already in contacts.`);
-      return;
-    } else if (contacts.find(item => item.number === number)) {
-      alert(`${number} is already in contacts.`);
-      return;
-    } else if (!/\d{3}[-]\d{2}[-]\d{2}/g.test(number)) {
-      alert('Enter the correct number phone!');
-    } else {
-      this.setState(prevState => ({
-        contacts: [addContact, ...prevState.contacts],
-      }));
-    }
+    this.setState(prevState => ({
+      contacts: [addContact, ...prevState.contacts],
+    }));
   };
 
   deleteContact = contactId => {
@@ -75,7 +63,10 @@ export class App extends Component {
           boxShadow="3px 4px 6px #888888"
         >
           <h1>Phonebook</h1>
-          <ContactForm onSubmit={this.hendlerFormData} />
+          <ContactForm
+            onSubmit={this.hendlerFormData}
+            contacts={this.state.contacts}
+          />
           {this.state.contacts.length === 0 ? (
             <h2>The phonebook is empty</h2>
           ) : (
