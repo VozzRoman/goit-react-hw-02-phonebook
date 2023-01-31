@@ -33,8 +33,8 @@ export class ContactForm extends Component {
     // 	name: this.state.name,
     // 	number: this.state.number
     // };
-    this.props.onSubmit(this.state, shortid.generate());
     this.resetForm();
+    this.props.onSubmit(this.state, shortid.generate());
   };
   resetForm = () => {
     this.setState({

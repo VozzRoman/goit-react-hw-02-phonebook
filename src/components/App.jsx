@@ -30,8 +30,10 @@ export class App extends Component {
 
     if (contacts.find(item => item.name === name)) {
       alert(`${name} is already in contacts.`);
+      return;
     } else if (contacts.find(item => item.number === number)) {
       alert(`${number} is already in contacts.`);
+      return;
     } else if (!/\d{3}[-]\d{2}[-]\d{2}/g.test(number)) {
       alert('Enter the correct number phone!');
     } else {
