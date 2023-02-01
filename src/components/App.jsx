@@ -8,17 +8,39 @@ import { ContactList } from './ContcatList/ContactList';
 import { Filter } from './Filter/Filter';
 
 export class App extends Component {
+  static LOCAL__KEY = 'contacts';
+
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
 
     filter: '',
   };
 
+  //-----------------------------LocalStorage------------------------------//
+
+  componentDidMount() {
+    console.log('didAmount');
+    const contact = localStorage.getItem(this.LOCAL__KEY);
+    const parsedContacts = JSON.parse(contact);
+    if (parsedContacts) {
+      this.setState({
+        contacts: parsedContacts,
+      });
+    }
+    console.log(parsedContacts);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('didUpdate');
+    if (this.state.contacts !== prevState.contacts) {
+      console.log('добавил контакт');
+      localStorage.setItem(
+        this.LOCAL__KEY,
+        JSON.stringify(this.state.contacts)
+      );
+    }
+  }
+  //----------------------------------------------------------------------//
   hendlerFormData = ({ name, number }, numberId) => {
     console.log({ name, number }); // data
     const addContact = {
