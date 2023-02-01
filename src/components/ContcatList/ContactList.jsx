@@ -1,20 +1,16 @@
-import {
-  ItemList,
-  ListContacts,
-  ButtonContact,
-  DialeName,
-} from './ContactListStyle';
+import { ItemList, ListContacts } from './ContactListStyle';
 import PropTypes from 'prop-types';
+import { ContactItem } from 'components/ContactItem/ContactItem';
 export const ContactList = ({ phoneContact, onDeleteContact }) => (
   <ListContacts>
     {phoneContact.map(({ id, name, number }) => (
       <ItemList key={id}>
-        <DialeName>
-          {name}: <span>{number}</span>
-        </DialeName>
-        <ButtonContact onClick={() => onDeleteContact(id)}>
-          Delete
-        </ButtonContact>
+        <ContactItem
+          name={name}
+          number={number}
+          id={id}
+          onDeleteContact={onDeleteContact}
+        />
       </ItemList>
     ))}
   </ListContacts>
